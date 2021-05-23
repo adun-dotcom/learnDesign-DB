@@ -24,7 +24,7 @@ app.use(cors())
 
 
 app.use('/users', usersRouter)
-app.use('/course', courseRouter)
+app.use('/users', courseRouter)
 
 app.get('/', (req, res)=>{
   res.send('we\'re good to go')

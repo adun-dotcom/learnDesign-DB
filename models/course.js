@@ -33,6 +33,9 @@ const courseSchema = new Schema({
     type: String,
     default: '',
   },
+  "Category": {
+    type: String
+  }
 })
 
 module.exports = mongoose.model('course', courseSchema)
