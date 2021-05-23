@@ -72,4 +72,17 @@ const User = require('../models/userSchema')
   }
 }
 
-module.exports = {signin, signup}
+const updateInfo = async (req, res)=>{
+  const {firstName, lastName, profilePic, email} = req.body
+  User.findOneAndUpdate({email: email}, 
+    {
+      firstName: firstName,
+      lastName: lastName,
+      profilePic: profilePic,
+      email: email,
+    }, ((err, doc)=>{
+      if(err){return res.json({message: 'wahala don show'})}
+     return res.json(doc)
+    }))
+}
+module.exports = {signin, signup, updateInfo}

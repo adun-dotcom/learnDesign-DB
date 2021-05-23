@@ -1,24 +1,30 @@
 const dotenv = require('dotenv')
 dotenv.config()
-
 const express = require('express')
+const app = express()
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+// const fileUpload = require('express-fileupload')
 
+// const helpers = require('./helpers')
 
+app.use('/uploads', express.static('uploads'))
+app.use(express.static(__dirname + '/public'))
 const usersRouter = require('./routes/users.js')
+const courseRouter = require('./routes/course.js')
 
-const app = express()
 
 // app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(cors())
+// app.use(fileUpload())
 
 
 app.use('/users', usersRouter)
+app.use('/course', courseRouter)
 
 app.get('/', (req, res)=>{
   res.send('we\'re good to go')
