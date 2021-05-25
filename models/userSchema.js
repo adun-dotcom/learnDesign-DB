@@ -16,6 +16,10 @@ const userSchema = new Schema({
     profilePic: {
         type: String,
         default: ''
+    },
+    savedCourses:{
+        type: Array,
+        default: []
     }
 })
 
