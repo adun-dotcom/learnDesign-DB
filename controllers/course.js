@@ -4,7 +4,7 @@ const courseModel = async (req, res)=>{
     // console.log(req.userId, 'courses')
     try {
         const courses = await courseSchema.find()
-        console.log(courses)
+        console.log(courses, 'courses')
         if (courses){
           return  res.json({courses})
         } else{
