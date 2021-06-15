@@ -5,7 +5,7 @@ const User = require('../models/userSchema')
 const updateInfo = async(req, res)=>{
   const { firstName, lastName, profilePic,email } = req.body
   try{
- return await User.findOneAndUpdate(
+ await User.findOneAndUpdate(
    { email:email },
    {
      firstName: firstName,
@@ -14,13 +14,16 @@ const updateInfo = async(req, res)=>{
    },
    function (err, result) {
      if (err) {
-       res.send(err)
+       console.log(err)
+      return res.send(err)
      } else {
-       res.json(result)
+       console.log(result)
+      return res.json(result)
      }
    }
  )
 } catch(error){
+  console.log(error)
   res.status(500).json({ message: 'cant edit user' })
 }
 }
