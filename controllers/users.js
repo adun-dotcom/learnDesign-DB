@@ -3,16 +3,23 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/userSchema')
 
 const updateInfo = async(req, res)=>{
-  const { firstName, lastName } = req.body
+  const { firstName, lastName, profilePic,email } = req.body
   try{
- return await User.findOneAndUpdate({email},{name: `${firstName} ${lastName}`}, function( err, result) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
-    }
-      
-})
+ return await User.findOneAndUpdate(
+   { email:email },
+   {
+     firstName: firstName,
+      lastName: lastName,
+      profilePic: profilePic,
+   },
+   function (err, result) {
+     if (err) {
+       res.send(err)
+     } else {
+       res.json(result)
+     }
+   }
+ )
 } catch(error){
   res.status(500).json({ message: 'cant edit user' })
 }
@@ -87,17 +94,17 @@ const updateInfo = async(req, res)=>{
   }
 }
 
-const updateInfo = async (req, res)=>{
-  const {firstName, lastName, profilePic, email} = req.body
-  User.findOneAndUpdate({email: email}, 
-    {
-      firstName: firstName,
-      lastName: lastName,
-      profilePic: profilePic,
-      email: email,
-    }, ((err, doc)=>{
-      if(err){return res.json({message: 'wahala don show'})}
-     return res.json(doc)
-    }))
-}
+// const updateInfo = async (req, res)=>{
+//   const {firstName, lastName, profilePic, email} = req.body
+//   User.findOneAndUpdate({email: email}, 
+//     {
+//       firstName: firstName,
+//       lastName: lastName,
+//       profilePic: profilePic,
+//       email: email,
+//     }, ((err, doc)=>{
+//       if(err){return res.json({message: 'wahala don show'})}
+//      return res.json(doc)
+//     }))
+// }
 module.exports = {signin, signup, updateInfo}
