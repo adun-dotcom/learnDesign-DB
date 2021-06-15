@@ -3,27 +3,28 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/userSchema')
 
 const updateInfo = async(req, res)=>{
-  const { firstName, lastName, profilePic,email } = req.body
+  const { firstName, lastName, profilePic, email } = req.body
+  console.log(req.body, "req.body")
   try{
  await User.findOneAndUpdate(
    { email:email },
    {
-     firstName: firstName,
-      lastName: lastName,
+     
+     name:`${firstName} ${lastName}`,
       profilePic: profilePic,
    },
    function (err, result) {
      if (err) {
-       console.log(err)
+       console.log(err, 'err')
       return res.send(err)
      } else {
-       console.log(result)
-      return res.json(result)
+       console.log(result, 'result')
+      return res.send(result)
      }
    }
  )
 } catch(error){
-  console.log(error)
+  console.log(error, 'catch err')
   res.status(500).json({ message: 'cant edit user' })
 }
 }
