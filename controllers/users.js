@@ -2,6 +2,21 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/userSchema')
 
+const updateInfo = async(req, res)=>{
+  const { firstName, lastName } = req.body
+  try{
+ return await User.findOneAndUpdate({email},{name: `${firstName} ${lastName}`}, function( err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+      
+})
+} catch(error){
+  res.status(500).json({ message: 'cant edit user' })
+}
+}
  const signin = async (req, res) => {
   const { email, password } = req.body
 
