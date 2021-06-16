@@ -8,7 +8,7 @@ const uploader =  require('../controllers/upload.js')
 /* GET users listing. */
 router.post('/signin', signin)
 router.post('/signup', signup)
-router.post('/update', updateInfo)
+router.put('/update', updateInfo)
 router.post('/upload', uploader)
 
 
